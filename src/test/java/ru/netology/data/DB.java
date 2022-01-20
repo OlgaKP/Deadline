@@ -30,5 +30,8 @@ public class DB {
     @SneakyThrows
     public static void deleteCode() {
         runner.execute(conn, "DELETE FROM auth_codes WHERE created < NOW() - INTERVAL 0 MINUTE");
+        runner.execute(conn, "DELETE FROM card_transactions WHERE created < NOW() - INTERVAL 0 MINUTE");
+        runner.execute(conn, "DELETE FROM cards WHERE cards.number IS NOT NULL");
+        runner.execute(conn, "DELETE FROM users WHERE login IS NOT NULL");
     }
 }
